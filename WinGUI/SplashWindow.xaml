@@ -1,0 +1,45 @@
+﻿<Window x:Class="WinGUI.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Pdf to Kindle Touch" Width="300" ResizeMode="NoResize" ShowInTaskbar="True" WindowStyle="ToolWindow" AllowDrop="True" Drop="Window_Drop" SizeToContent="Height"  Loaded="Window_Loaded" Icon="/WinGUI;component/pdf2kt.ico">
+    <StackPanel Margin="5">
+    <Label Name="labelInfo" Content="Drop file to convert here." VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+    <Grid Name="gridInfo" Visibility="Hidden">
+        <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Document Title</TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Document Author</TextBlock>
+            <TextBlock Grid.Row="2" Grid.Column="0" VerticalAlignment="Center">Page Width</TextBlock>
+            <TextBlock Grid.Row="3" Grid.Column="0" VerticalAlignment="Center">Page Height</TextBlock>
+            <TextBlock Grid.Row="4" Grid.Column="0" VerticalAlignment="Center">Render Colors</TextBlock>
+            <TextBlock Grid.Row="5" Grid.Column="0" VerticalAlignment="Center">Output Type</TextBlock>
+
+            <TextBox Grid.Row="0" Grid.Column="1" Name="txtDocumentTitle" Margin="0,3,0,3" VerticalAlignment="Center"></TextBox>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="txtDocumentAuthor" Margin="0,3,0,3" VerticalAlignment="Center"></TextBox>
+            <TextBox Grid.Row="2" Grid.Column="1" Name="txtPageWidth" Margin="0,3,0,3" VerticalAlignment="Center">735</TextBox>
+            <TextBox Grid.Row="3" Grid.Column="1" Name="txtPageHeight" Margin="0,3,0,3" VerticalAlignment="Center">560</TextBox>
+            <ComboBox Grid.Row="4" Grid.Column="1" Name="lbColors" Margin="0,3,0,3">
+                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">16</ComboBoxItem>
+            </ComboBox>
+            <ComboBox Grid.Row="5" Grid.Column="1" Name="lbWriter" Margin="0,3,0,3">
+                <ComboBoxItem IsSelected="True">PDF</ComboBoxItem>
+                <ComboBoxItem>Image Sequence</ComboBoxItem>
+            </ComboBox>
+
+            <Button Name="buttonContinue" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,3,0,0" Padding="10,0,10,0">Continue</Button>
+        </Grid>
+    </StackPanel>
+</Window>
