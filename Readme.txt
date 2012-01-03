@@ -1,6 +1,6 @@
 PDF to Kindle Touch (Pdf2KT)
 
-deathvoyage.wordpress.com
 https://github.com/skpdvdd/Pdf2KT
+http://deathvoyage.wordpress.com/2012/01/02/pdf-to-kindle-touch/
 
 See License.txt
