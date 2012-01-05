@@ -33,6 +33,7 @@
             <ComboBox Grid.Row="4" Grid.Column="1" Name="lbColors" Margin="0,3,0,3">
                 <ComboBoxItem>4</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">16</ComboBoxItem>
+                <ComboBoxItem>128</ComboBoxItem>
             </ComboBox>
             <ComboBox Grid.Row="5" Grid.Column="1" Name="lbWriter" Margin="0,3,0,3">
                 <ComboBoxItem IsSelected="True">PDF</ComboBoxItem>

@@ -9,12 +9,12 @@ namespace Pdf2KT
     public interface IDocument : IDisposable
     {
         /// <summary>
-        /// Gets or sets the title (empty if none).
+        /// Gets or sets the title.
         /// </summary>
         string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the author (empty if none).
+        /// Gets or sets the author.
         /// </summary>
         string Author { get; set; }
 

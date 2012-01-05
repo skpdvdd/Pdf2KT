@@ -14,7 +14,7 @@ namespace Pdf2KT
         /// <param name="filePath">The destination path.</param>
         /// <param name="converter">The converter to use.</param>
         /// <param name="bitmapProcessor">The bitmap processor to use to process the pages.</param>
-        public PDFWriter(string filePath, DocumentConverter converter, BitmapSourceConverter bitmapProcessor) : base(filePath, converter, bitmapProcessor) { }
+        public PDFWriter(string filePath, IDocumentConverter converter, BitmapSourceConverter bitmapProcessor) : base(filePath, converter, bitmapProcessor) { }
 
         protected override void WriteDocument(object sender, DoWorkEventArgs e)
         {
@@ -64,7 +64,7 @@ namespace Pdf2KT
                     document.Add(pdfpage);
                 }
 
-                worker.ReportProgress((int)((Converter.CurrentProcessedPageNumber * 1f) / Converter.NumberOfPages * 100));
+                worker.ReportProgress((int)((Converter.CurrentProcessedPageNumber * 1f) / Converter.PageCount * 100));
             }
 
             document.Close();

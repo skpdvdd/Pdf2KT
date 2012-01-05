@@ -52,8 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BitmapSourceConverter.cs" />
+    <Compile Include="DummyDocumentConverter.cs" />
+    <Compile Include="IDocumentConverter.cs" />
+    <Compile Include="ImageSequenceDocument.cs" />
     <Compile Include="Pdf2KTException.cs" />
-    <Compile Include="DocumentConverter.cs" />
+    <Compile Include="KindleDocumentConverter.cs" />
     <Compile Include="IDocument.cs" />
     <Compile Include="DocumentWriter.cs" />
     <Compile Include="ImageSequenceWriter.cs" />

@@ -15,7 +15,7 @@ namespace Pdf2KT
         /// <param name="filePath">The destination path.</param>
         /// <param name="converter">The converter to use.</param>
         /// <param name="bitmapProcessor">The bitmap processor to use to process the pages.</param>
-        public ImageSequenceWriter(string filePath, DocumentConverter converter, BitmapSourceConverter bitmapProcessor) : base(filePath, converter, bitmapProcessor) { }
+        public ImageSequenceWriter(string filePath, IDocumentConverter converter, BitmapSourceConverter bitmapProcessor) : base(filePath, converter, bitmapProcessor) { }
 
         /// <summary>
         /// Write the document.
@@ -45,7 +45,7 @@ namespace Pdf2KT
                 BitmapEncoder encoder = BitmapProcessor.GetBitmapEncoder();
                 string extension = encoder.CodecInfo.FileExtensions;
 
-                using (FileStream fs = new FileStream(Path.Combine(FilePath, string.Format("page_{0}{1}", pageNum, extension)), FileMode.Create))
+                using (FileStream fs = new FileStream(Path.Combine(FilePath, string.Format("page_{0:0000}{1}", pageNum, extension)), FileMode.Create))
                 {
                     BitmapSource processed = BitmapProcessor.Convert(Converter.Current);
 
@@ -55,7 +55,7 @@ namespace Pdf2KT
                     pageNum++;
                 }
 
-                worker.ReportProgress((int)((Converter.CurrentProcessedPageID * 1f) / Converter.NumberOfPages * 100));
+                worker.ReportProgress((int)((Converter.CurrentProcessedPageID * 1f) / Converter.PageCount * 100));
             }
         }
     }

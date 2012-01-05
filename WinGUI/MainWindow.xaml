@@ -10,10 +10,12 @@
         <Grid Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"></ColumnDefinition>
+                <ColumnDefinition Width="100"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Margin="0,0,5,0" Name="btnConvert" Content="Convert" HorizontalAlignment="Stretch" />
-            <ProgressBar Grid.Column="1" Name="progressBar" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>
+            <Button Grid.Column="0" Margin="0,0,5,0" Name="btnSavePages" Content="Save Pages" HorizontalAlignment="Stretch" Click="btnSavePages_Click" />
+            <Button Grid.Column="1" Margin="0,0,5,0" Name="btnConvert" Content="Convert" HorizontalAlignment="Stretch" Click="btnConvert_Click" />
+            <ProgressBar Grid.Column="2" Name="progressBar" HorizontalAlignment="Stretch" Minimum="0" Maximum="100"></ProgressBar>
         </Grid>
     </StackPanel>
 </Window>

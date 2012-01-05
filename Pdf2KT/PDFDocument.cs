@@ -57,12 +57,12 @@ namespace Pdf2KT
         }
 
         /// <summary>
-        /// Gets or sets the title (empty if none).
+        /// Gets or sets the title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Gets or sets the author (empty if none).
+        /// Gets or sets the author.
         /// </summary>
         public string Author { get; set; }
 

@@ -10,7 +10,11 @@ namespace Pdf2KT
     {
         readonly PixelFormat _format;
         readonly Encoder _encoder;
-        readonly int _rotate;
+
+        /// <summary>
+        /// Degrees of rotation to apply (counterclick whise).
+        /// </summary>
+        public int Rotate { get; set; }
 
         /// <summary>
         /// Ctor.
@@ -22,7 +26,8 @@ namespace Pdf2KT
         {
             _format = format;
             _encoder = encoder;
-            _rotate = rotate;
+
+            Rotate = rotate;
         }
 
         /// <summary>
@@ -46,8 +51,8 @@ namespace Pdf2KT
             if(bitmap.Format != _format)
                 result = new FormatConvertedBitmap(result, _format, null, 0);
 
-            if(_rotate != 0)
-                result = new TransformedBitmap(result, new RotateTransform(_rotate));
+            if(Rotate != 0)
+                result = new TransformedBitmap(result, new RotateTransform(Rotate));
 
             return result;
         }

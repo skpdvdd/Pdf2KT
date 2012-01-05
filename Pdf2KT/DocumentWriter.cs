@@ -39,7 +39,7 @@ namespace Pdf2KT
         /// <summary>
         /// The document converter.
         /// </summary>
-        protected readonly DocumentConverter Converter;
+        protected readonly IDocumentConverter Converter;
 
         /// <summary>
         /// The destination path.
@@ -54,7 +54,7 @@ namespace Pdf2KT
         /// <param name="filePath">The destination path.</param>
         /// <param name="converter">The converter to use.</param>
         /// <param name="bitmapProcessor">The bitmap processor to use to process the pages.</param>
-        public DocumentWriter(string filePath, DocumentConverter converter, BitmapSourceConverter bitmapProcessor)
+        public DocumentWriter(string filePath, IDocumentConverter converter, BitmapSourceConverter bitmapProcessor)
         {
             FilePath = filePath;
             Converter = converter;

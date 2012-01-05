@@ -29,9 +29,7 @@ namespace WinGUI
         void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             try
-            {
-               btnConvert.Click += new RoutedEventHandler(btnConvert_Click);
-               
+            {               
                _displayPage();
             }
             catch (Exception ex)
@@ -74,11 +72,33 @@ namespace WinGUI
             imgPage.Source = page;
         }
 
-        bool _converting;
+        bool _converting, _savingPages;
         DocumentWriter _writer;
+
+        private void btnSavePages_Click(object sender, RoutedEventArgs e)
+        {
+            btnConvert.IsEnabled = false;
+
+            if (_savingPages)
+            {
+                btnSavePages.Content = "Canceling";
+                _writer.Cancel();
+                return;
+            }
+
+            _savingPages = true;
+            btnSavePages.Content = "Cancel";
+
+            Config.BitmapConverter.Rotate = 0;
+            DummyDocumentConverter converter = new DummyDocumentConverter(Config.Document, Enumerable.Range(1, Config.Document.PageCount));
+            
+            _convert(converter);
+        }
 
         void btnConvert_Click(object sender, RoutedEventArgs e)
         {
+            btnSavePages.IsEnabled = false;
+
             if (_converting)
             {
                 btnConvert.Content = "Canceling";
@@ -89,8 +109,14 @@ namespace WinGUI
             _converting = true;
             btnConvert.Content = "Cancel";
 
-            DocumentConverter converter = new DocumentConverter(Config.Document, Enumerable.Range(1, Config.Document.PageCount), Config.PageHeight);
+            Config.BitmapConverter.Rotate = 270;
+            KindleDocumentConverter converter = new KindleDocumentConverter(Config.Document, Enumerable.Range(1, Config.Document.PageCount), Config.PageHeight);
             
+            _convert(converter);
+        }
+
+        void _convert(IDocumentConverter converter)
+        {
             if (Config.WriterType == Config.DocumentWriterType.PDF)
                 _writer = new PDFWriter(Config.OutputPath, converter, Config.BitmapConverter);
             else
@@ -105,7 +131,13 @@ namespace WinGUI
         void writer_Completed(string filePath, bool canceled)
         {
             btnConvert.IsEnabled = false;
-            btnConvert.Content = canceled ? "canceled" : "completed";
+            btnSavePages.IsEnabled = false;
+
+            if(_converting)
+                btnConvert.Content = canceled ? "canceled" : "completed";
+
+            if (_savingPages)
+                btnSavePages.Content = canceled ? "canceled" : "completed";
         }
 
         void writer_ProgressChanged(int progress)

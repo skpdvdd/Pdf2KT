@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Media;
 using Pdf2KT;
+using System.IO;
 
 namespace WinGUI
 {
@@ -11,9 +12,15 @@ namespace WinGUI
     {
         IDocument _document;
 
+        readonly PixelFormat[] _outputFormats;
+        readonly Config.DocumentWriterType[] _writerTypes;
+
         public SplashWindow()
         {
             InitializeComponent();
+
+            _outputFormats = new PixelFormat[] { PixelFormats.Gray2, PixelFormats.Gray4, PixelFormats.Gray8 };
+            _writerTypes = new Config.DocumentWriterType[] { Config.DocumentWriterType.PDF, Config.DocumentWriterType.ImageSequence };
         }
 
         private void Window_Drop(object sender, DragEventArgs e)
@@ -26,7 +33,7 @@ namespace WinGUI
             string filename = files[0];
             string extension = System.IO.Path.GetExtension(filename);
 
-            if (extension.ToLower() != ".pdf")
+            if (!Directory.Exists(filename) && extension.ToLower() != ".pdf")
             {
                 labelInfo.Content = "Only PDF files are supported.";
                 return;
@@ -37,7 +44,10 @@ namespace WinGUI
             labelInfo.Content = System.IO.Path.GetFileName(filename);
             gridInfo.Visibility = Visibility.Visible;
 
-            _document = new PDFDocument(filename);
+            if(Directory.Exists(filename))
+                _document = new ImageSequenceDocument(filename);
+            else
+                _document = new PDFDocument(filename);
 
             txtDocumentTitle.Text = _document.Title;
             txtDocumentAuthor.Text = _document.Author;
@@ -97,9 +107,9 @@ namespace WinGUI
             Config.Document = _document;
             Config.PageHeight = pageHeight;
 
-            PixelFormat outputFormat = lbColors.SelectedIndex == 0 ? PixelFormats.Gray2 : PixelFormats.Gray4;
-            Config.BitmapConverter = new BitmapSourceConverter(outputFormat, new BitmapSourceConverter.PngEncoder(), 270);
-            Config.WriterType = lbWriter.SelectedIndex == 0 ? Config.DocumentWriterType.PDF : Config.DocumentWriterType.ImageSequence;
+            Config.WriterType = _writerTypes[lbWriter.SelectedIndex];
+            PixelFormat outputFormat = _outputFormats[lbColors.SelectedIndex];
+            Config.BitmapConverter = new BitmapSourceConverter(outputFormat, new BitmapSourceConverter.PngEncoder());
 
             string inputDirectory = System.IO.Path.GetDirectoryName(Config.InputPath);
             string inputFileName = System.IO.Path.GetFileNameWithoutExtension(Config.InputPath);

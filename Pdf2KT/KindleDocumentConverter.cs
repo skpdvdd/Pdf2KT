@@ -10,7 +10,7 @@ namespace Pdf2KT
     /// <summary>
     /// Converts a document so that the pages match a given height.
     /// </summary>
-    public class DocumentConverter : IEnumerator<BitmapSource>
+    public class KindleDocumentConverter : IDocumentConverter
     {
         /// <summary>
         /// Returns the page number of the page of the input document
@@ -33,7 +33,7 @@ namespace Pdf2KT
         /// <summary>
         /// Returns the total number of pages to convert from.
         /// </summary>
-        public int NumberOfPages
+        public int PageCount
         {
             get { return _fragmentSource.NumPages; }
         }
@@ -58,7 +58,7 @@ namespace Pdf2KT
         /// <param name="pages">The numbers of the pages that should be converted.</param>
         /// <param name="pageHeight">The height of the output pages.</param>
         /// <exception cref="Pdf2KTException">If there are not pages to convert.</exception>
-        public DocumentConverter(IDocument document, IEnumerable<int> pages, int pageHeight)
+        public KindleDocumentConverter(IDocument document, IEnumerable<int> pages, int pageHeight)
         {
             if (document.PageCount == 0)
                 throw new Pdf2KTException("Document contains no pages.");
